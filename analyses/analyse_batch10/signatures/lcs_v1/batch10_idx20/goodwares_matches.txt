@@ -1,0 +1,2 @@
+softcnapp /test_batch10/signatures/reduced_dataset/goodware/test/0d2115dd3167a7b32c66d21f7e2ab8f1f049a9f56d9c53dd946d27fcdf18c7b0
+doina /test_batch10/signatures/reduced_dataset/goodware/test/0fc01f8eaeda60a4f4e3b9e1b38ef93414cf86331e664d76f9962487088a9793
