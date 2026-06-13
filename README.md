@@ -1,4 +1,4 @@
-# resproj — LCS-based YARA signature generator
+# LCS-based YARA signature generator
 
 Automatic generation of YARA signatures for malware families, based on the
 **Longest Common Subsequence (LCS)** of their binary samples. Given a set of
