@@ -7,8 +7,7 @@ shared across the samples and turn them into a YARA rule that can be used to
 detect other members of that family.
 
 The project is built around [`edlib`](https://github.com/Martinsos/edlib), a
-C-backed library for fast Levenshtein distance and global/local sequence
-alignment.
+C-backed library for fast Levenshtein distance and local sequence alignment.
 
 ## Approach
 
@@ -26,9 +25,9 @@ Two generators are provided:
      a family are handled separately.
   2. **Pair selection** — within each cluster, a representative pair is chosen
      (e.g. the pair whose distance is closest to the cluster median).
-  3. **Alignment** — global (Needleman-Wunsch) or local (sliding-window,
-     Smith-Waterman-style `HW` mode, via `--local`) alignment extracts matching
-     regions and converts them into YARA strings with bounded gaps `[min-max]`.
+  3. **Alignment** — local sliding-window alignment (`HW` mode via `--local`)
+    extracts matching regions and converts them into YARA strings with bounded
+    gaps `[min-max]`.
   4. **Filtering** — generic blocks are discarded (PE headers, null-byte runs,
      low-entropy or arithmetic sequences, blocks that are too short) to reduce
      false positives.
@@ -54,9 +53,6 @@ binaries. The output rule is written to `signatures/<family>/<family>.yar`.
 # Baseline generator
 python codes/baseline_lcs.py path/to/family_dir -v --workers 4
 
-# Refined generator (global alignment)
-python codes/lcs_v1.py path/to/family_dir -v --workers 4
-
 # Refined generator with local sliding-window alignment
 python codes/lcs_v1.py path/to/family_dir --local -v --workers 4
 ```
@@ -68,7 +64,7 @@ Common options:
 | `--truncate-bytes N` | Read up to N bytes per file (default: 1,000,000). |
 | `--workers N` | Number of processes for distance computation (default: 0 = single process). |
 | `--batch-size N` | Use only the first N files for training (`lcs_v1.py`). |
-| `--local` | Use local sliding-window alignment instead of global (`lcs_v1.py`). |
+| `--local` | Use local sliding-window alignment (`lcs_v1.py`). |
 | `-v` / `-vv` | INFO / DEBUG logging. |
 
 ## Repository structure
